@@ -1,0 +1,6 @@
+bases:
+- github.com/ahanafy/cluster-base/base/
+resources:
+- cmtest.yaml
+patchesStrategicMerge:
+- flux-patch.yaml
