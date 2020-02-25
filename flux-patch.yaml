@@ -17,5 +17,6 @@ spec:
       pollInterval: '1m'
       readonly: true
       name: 'Fluxcd Operator kimport'
+    manifestGeneration: true
     registry:
       pollInterval: '1m'
