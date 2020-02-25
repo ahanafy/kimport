@@ -15,4 +15,4 @@ helm delete sealed-secrets -n kube-system
 
 kubectl delete ns fluxcd
 
-kubectl delete hr -A
+kubectl delete hr -all
