@@ -15,7 +15,7 @@ spec:
       url: 'git@github.com:ahanafy/kimport'
       branch: 'master'
       pollInterval: '1m'
-      readonly: false
+      readonly: true
       name: 'Fluxcd Operator kimport'
     registry:
       pollInterval: '1m'

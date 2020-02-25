@@ -1,5 +1,5 @@
 bases:
-- github.com/ahanafy/cluster-base/base/
+- github.com/ahanafy/cluster-base/base?ref=8bdcdada9b1fcb369a1624098e3e5b4db936d05d
 resources:
 - cmtest.yaml
 patchesStrategicMerge:
