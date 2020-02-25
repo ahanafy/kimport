@@ -12,7 +12,7 @@ spec:
   values:
     replicaCount: 1
     git:
-      url: 'https://github.com/ahanafy/kimport.git'
+      url: 'git@github.com:ahanafy/kimport'
       branch: 'master'
       pollInterval: '1m'
       readonly: true
