@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 bases:
-- github.com/ahanafy/cluster-base/base?ref=8bdcdada9b1fcb369a1624098e3e5b4db936d05d
+- github.com/ahanafy/cluster-base/base?ref=89927faeecd69f459f85928c08601163dbbc1fd4
 resources:
 - cmtest.yaml
 patchesStrategicMerge:
