@@ -21,7 +21,8 @@ if [[ ! -x "$(command -v kubeseal)" ]]; then
 fi
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-REPO_URL=${1:-https://github.com/ahanafy/cluster-base.git}
+REPO_DEFAULT=$(git config --get remote.origin.url)
+REPO_URL=${1:-$REPO_DEFAULT}
 REPO_BRANCH='master'
 REPO_PUBLIC=true
 
