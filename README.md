@@ -19,9 +19,10 @@ Download Instructions: https://github.com/helm/helm/releases
 Download Instructions: https://github.com/bitnami-labs/sealed-secrets/releases
 ```
 
-` `  
-` `  
-` `  
+
+
+
+
 
 ## **Deploy**
 
