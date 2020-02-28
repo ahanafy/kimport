@@ -15,4 +15,4 @@ helm delete sealed-secrets -n kube-system
 
 kubectl delete ns fluxcd
 
-kubectl delete hr -all
+kubectl get hr --no-headers=true --all-namespaces | xargs -L1 bash -c 'kubectl delete -n $0 hr $1'
