@@ -67,10 +67,25 @@ _In this example i use jq to add annotation to the initial manifest_
 https://github.com/bitnami-labs/sealed-secrets#scopes
 
 ```
-$ kubectl create secret generic test-secret -n mynamespace \
+$ kubectl create secret generic test-secret -n default \
 --from-literal=username='my-app' --from-literal=password='39528$vdg7Jb' \
 --dry-run -ojson | \
 jq '.metadata += {"annotations":{"sealedsecrets.bitnami.com/cluster-wide":"true"}}' | \
 kubeseal --cert pub-cert.pem --format yaml \
 > mysealedsecret.yaml
+```
+
+## Take ownership of auto-generated fluxcd git ssh key
+
+### Convert fluxcd-git-deploy to sealed-secret managed version and commit to repo
+```
+kubectl get secret/fluxcd-git-deploy -n fluxcd -o json | jq 'del(.metadata.creationTimestamp, .metadata.resourceVersion,.metadata.selfLink,.metadata.uid) | .metadata += {"annotations":{"sealedsecrets.bitnami.com/managed":"true"}}' | kubeseal --cert pub-cert.pem --format yaml > fluxcd-git-deploy.yaml
+```
+
+Uncomment the git.secretName line in the flux-patch.yaml file to sync this new file and have Sealed-Secrets "take over" the secret 
+
+
+### If you need to print the public key again to load into GitHub
+```
+kubectl get secrets/fluxcd-git-deploy -n fluxcd -o jsonpath='{.data.identity}'  | base64 -d | ssh-keygen -f /dev/stdin -y
 ```

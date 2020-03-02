@@ -3,6 +3,6 @@ kind: Kustomization
 bases:
 - github.com/ahanafy/cluster-base/base?ref=89927faeecd69f459f85928c08601163dbbc1fd4
 resources:
-- cmtest.yaml
+- fluxcd-git-deploy.yaml
 patchesStrategicMerge:
 - flux-patch.yaml
