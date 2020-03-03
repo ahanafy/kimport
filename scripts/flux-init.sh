@@ -49,3 +49,4 @@ helm upgrade -i helm-operator fluxcd/helm-operator --wait --cleanup-on-fail \
 
 echo '>>> GitHub deploy key'
 kubectl -n fluxcd logs deployment/fluxcd | grep identity.pub | cut -d '"' -f2
+

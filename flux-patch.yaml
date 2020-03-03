@@ -17,8 +17,7 @@ spec:
       pollInterval: '1m'
       readonly: true
       name: 'Fluxcd Operator kimport'
-      # after you commit your personal ssh key 'fluxcd-git-deploy.yaml' uncomment the next line
-      # secretName: fluxcd-git-deploy
+      secretName: fluxcd-git-deploy
     manifestGeneration: true
     registry:
       pollInterval: '1m'

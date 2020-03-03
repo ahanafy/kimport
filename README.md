@@ -75,15 +75,7 @@ kubeseal --cert pub-cert.pem --format yaml \
 > mysealedsecret.yaml
 ```
 
-## Take ownership of auto-generated fluxcd git ssh key
-
-### Convert fluxcd-git-deploy to sealed-secret managed version and commit to repo
-```
-kubectl get secret/fluxcd-git-deploy -n fluxcd -o json | jq 'del(.metadata.creationTimestamp, .metadata.resourceVersion,.metadata.selfLink,.metadata.uid) | .metadata += {"annotations":{"sealedsecrets.bitnami.com/managed":"true"}}' | kubeseal --cert pub-cert.pem --format yaml > fluxcd-git-deploy.yaml
-```
-
-Uncomment the git.secretName line in the flux-patch.yaml file to sync this new file and have Sealed-Secrets "take over" the secret 
-
+## To reconnect fluxcd to git repo
 
 ### If you need to print the public key again to load into GitHub
 ```
