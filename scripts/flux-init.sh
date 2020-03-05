@@ -2,6 +2,19 @@
 
 set -e
 
+usage() { echo "Usage: $0 [-r <repourl>] [-b <branch>] [-k <sealed-secrets-key-file>]" 1>&2; exit 1; }
+
+while getopts r:k:b: option
+do
+case "${option}"
+in
+r) CUST_REPO=${OPTARG};;
+b) CUST_BRANCH=${OPTARG};;
+k) SS_MASTERKEY=${OPTARG};;
+esac
+done
+
+
 if [[ ! -x "$(command -v kubectl)" ]]; then
     echo "kubectl not found"
     echo ">>> download the latest from here: https://kubernetes.io/docs/tasks/tools/install-kubectl/"
@@ -22,8 +35,9 @@ fi
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 REPO_DEFAULT=$(git config --get remote.origin.url)
-REPO_URL=${1:-$REPO_DEFAULT}
-REPO_BRANCH='master'
+REPO_URL=${CUST_REPO:-$REPO_DEFAULT}
+REPO_BRANCH_DEFAULT='master'
+REPO_BRANCH=${CUST_BRANCH:-$REPO_BRANCH_DEFAULT}
 REPO_PUBLIC=true
 
 echo ">>> Creating Flux Namespace"
@@ -50,3 +64,8 @@ helm upgrade -i helm-operator fluxcd/helm-operator --wait --cleanup-on-fail \
 echo '>>> GitHub deploy key'
 kubectl -n fluxcd logs deployment/fluxcd | grep identity.pub | cut -d '"' -f2
 
+if ! [ -z ${SS_MASTERKEY+x} ]; 
+then 
+echo "applying '$SS_MASTERKEY'";
+kubectl apply -f $SS_MASTERKEY;
+fi
