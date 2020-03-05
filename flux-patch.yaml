@@ -17,7 +17,6 @@ spec:
       pollInterval: '1m'
       readonly: true
       name: 'Fluxcd Operator kimport'
-      secretName: fluxcd-git-deploy
     manifestGeneration: true
     registry:
       pollInterval: '1m'
